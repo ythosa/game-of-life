@@ -26,11 +26,19 @@ namespace GameOfLife
             return x >= 0 && y >= 0 && x < cols && y < rows;
         }
 
-        private void InitField()
+        private void InitGame()
         {
             currentGeneration = 0;
             Text = $"Game of Life. Generation: {currentGeneration}";
 
+            InitField();
+
+            gameContent.Image = new Bitmap(gameContent.Width, gameContent.Height);
+            graphics = Graphics.FromImage(gameContent.Image);
+        }
+
+        private void InitField()
+        {
             resolution = (int)nudResolution.Value;
             rows = gameContent.Height / resolution;
             cols = gameContent.Width / resolution;
@@ -44,9 +52,6 @@ namespace GameOfLife
                     field[x, y] = random.Next((int)nudDensity.Value) == 0;
                 }
             }
-
-            gameContent.Image = new Bitmap(gameContent.Width, gameContent.Height);
-            graphics = Graphics.FromImage(gameContent.Image);
         }
 
         private void NextGeneration()

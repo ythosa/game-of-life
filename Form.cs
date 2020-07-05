@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace GameOfLife
 {
     public partial class Form : System.Windows.Forms.Form
     {
+        private bool isPaused = false;
+
         public Form()
         {
             InitializeComponent();
@@ -23,7 +24,16 @@ namespace GameOfLife
 
         private void bStart_Click(object sender, EventArgs e)
         {
-            StartGame();
+            if (isPaused)
+            {
+                ResumeGame();
+                isPaused = false;
+            } else
+            {
+                StartGame();
+            }
+
+            
         }
 
         private void bStop_Click(object sender, EventArgs e)
@@ -43,24 +53,44 @@ namespace GameOfLife
 
         private void StartGame()
         {
-            if (timer.Enabled) return; // If game has already starts
+            if (timer.Enabled) return;
 
             nudResolution.Enabled = false;
             nudDensity.Enabled = false;
 
-            InitField();
+            InitGame();
 
             timer.Start();
         }
 
         private void StopGame()
         {
-            if (!timer.Enabled) return; // If games hasn't started
+            if (!timer.Enabled) return;
 
             timer.Stop();
 
             nudResolution.Enabled = true;
             nudDensity.Enabled = true;
+
+            if (isPaused)
+            {
+                bStop.Text = "Break";
+                isPaused = false;
+            } else
+            {
+                bStart.Text = "Resume";
+                isPaused = true;
+            }
+        }
+
+        private void ResumeGame()
+        {
+            if (timer.Enabled) return;
+
+            timer.Start();
+
+            bStart.Text = "Start";
+            bStop.Text = "Stop";
         }
     }
 }
