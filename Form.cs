@@ -13,6 +13,7 @@ namespace GameOfLife
     public partial class Form : System.Windows.Forms.Form
     {
         private Graphics graphics;
+        private int currentGeneration = 0;
         private int resolution;
         private bool[,] field;
         private int rows;
@@ -41,6 +42,9 @@ namespace GameOfLife
         private void StartGame()
         {
             if (timer.Enabled) return; // If game has already starts
+
+            currentGeneration = 0;
+            Text = $"Generation: {currentGeneration}";
 
             nudResolution.Enabled = false;
             nudDensity.Enabled = false;
@@ -108,6 +112,7 @@ namespace GameOfLife
                 }
             }
 
+            Text = $"Generation: {++currentGeneration}";
             field = newField;
             gameContent.Refresh();
         }
