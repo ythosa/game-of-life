@@ -15,6 +15,8 @@ namespace GameOfLife
         private void Form_Load(object sender, EventArgs e)
         {
             Text = "Game of Life";
+            bStop.Enabled = false;
+            bStop.Text = "Pause";
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -26,19 +28,31 @@ namespace GameOfLife
         {
             if (isPaused)
             {
+                bStart.Enabled = false;
                 ResumeGame();
-                isPaused = false;
+
+                SetPaused();
             } else
             {
+                bStop.Enabled = true;
                 StartGame();
             }
-
-            
         }
 
         private void bStop_Click(object sender, EventArgs e)
         {
-            StopGame();
+            SetPaused();
+
+            if (isPaused)
+            {
+                bStart.Enabled = true;
+                StopGame();
+            }
+            else
+            {
+                bStop.Enabled = false;
+                PauseGame();
+            }
         }
 
         private void gameContent_MouseMove(object sender, MouseEventArgs e)
@@ -63,34 +77,39 @@ namespace GameOfLife
             timer.Start();
         }
 
+        private void PauseGame()
+        {
+            timer.Stop();
+        }
+
         private void StopGame()
         {
-            if (!timer.Enabled) return;
-
             timer.Stop();
 
             nudResolution.Enabled = true;
             nudDensity.Enabled = true;
-
-            if (isPaused)
-            {
-                bStop.Text = "Break";
-                isPaused = false;
-            } else
-            {
-                bStart.Text = "Resume";
-                isPaused = true;
-            }
         }
 
         private void ResumeGame()
         {
-            if (timer.Enabled) return;
-
             timer.Start();
+        }
 
-            bStart.Text = "Start";
-            bStop.Text = "Stop";
+        private void SetPaused()
+        {
+            if (isPaused)
+            {
+                bStop.Text = "Pause";
+                bStart.Text = "Start";
+
+                isPaused = false;
+            } else
+            {
+                bStop.Text = "Stop";
+                bStart.Text = "Resume";
+
+                isPaused = true;
+            }
         }
     }
 }
