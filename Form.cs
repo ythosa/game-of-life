@@ -1,24 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GameOfLife
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        private Graphics graphics;
-        private int currentGeneration = 0;
-        private int resolution;
-        private bool[,] field;
-        private int rows;
-        private int cols;
-
         public Form()
         {
             InitializeComponent();
@@ -49,46 +36,19 @@ namespace GameOfLife
             if (!timer.Enabled) return;
 
             if (e.Button == MouseButtons.Left)
-            {
                 SetOnMousePos(e.Location.X, e.Location.Y, true);
-            } else if (e.Button == MouseButtons.Right)
-            {
+            else if (e.Button == MouseButtons.Right)
                 SetOnMousePos(e.Location.X, e.Location.Y, false);
-            }
-        }
-
-        private void SetOnMousePos(int mouseX, int mouseY, bool value)
-        {
-            var x = mouseX / resolution;
-            var y = mouseY / resolution;
-            var isValidationPassed = ValidateMousePosition(x, y);
-
-            if (isValidationPassed) field[x, y] = value;
-        }
-
-        private bool ValidateMousePosition(int x, int y)
-        {
-            return x >= 0 && y >= 0 && x < cols && y < rows;
         }
 
         private void StartGame()
         {
             if (timer.Enabled) return; // If game has already starts
 
-            currentGeneration = 0;
-            Text = $"Game of Life. Generation: {currentGeneration}";
-
             nudResolution.Enabled = false;
             nudDensity.Enabled = false;
 
-            resolution = (int)nudResolution.Value;
-            rows = gameContent.Height / resolution;
-            cols = gameContent.Width / resolution;
-            field = new bool[cols, rows];
             InitField();
-
-            gameContent.Image = new Bitmap(gameContent.Width, gameContent.Height);
-            graphics = Graphics.FromImage(gameContent.Image);
 
             timer.Start();
         }
@@ -101,73 +61,6 @@ namespace GameOfLife
 
             nudResolution.Enabled = true;
             nudDensity.Enabled = true;
-
-
-        }
-
-        private void InitField()
-        {
-            Random random = new Random();
-            for (int x = 0; x < cols; x++)
-            {
-                for (int y = 0; y < rows; y++)
-                {
-                    field[x, y] = random.Next((int)nudDensity.Value) == 0;
-                }
-            }
-        }
-
-        private void NextGeneration()
-        {
-            graphics.Clear(Color.Black);
-
-            var newField = new bool[cols, rows];
-
-            for (int x = 0; x < cols; x++)
-            {
-                for (int y = 0; y < rows; y++)
-                {
-                    var neighboursCount = CountNeightbours(x, y);
-                    var hasLife = field[x, y];
-
-                    if (!hasLife && neighboursCount == 3)
-                        newField[x, y] = true;
-                    else if (hasLife && (neighboursCount < 2 || neighboursCount > 3))
-                        newField[x, y] = false;
-                    else
-                        newField[x, y] = field[x, y];
-                    
-                    if (hasLife)
-                    {
-                        graphics.FillRectangle(Brushes.Crimson, x * resolution, y * resolution, resolution, resolution);
-                    }
-                }
-            }
-
-            Text = $"Game of Life. Generation: {++currentGeneration}";
-            field = newField;
-            gameContent.Refresh();
-        }
-
-        private int CountNeightbours(int x, int y)
-        {
-            int count = 0;
-
-            for (int i = -1; i < 2; i++)
-            {
-                for (int j = -1; j < 2; j++)
-                {
-                    int col = (x + i + cols) % cols;
-                    int row = (y + j + rows) % rows;
-
-                    bool isSelfChecking = col == x && row == y;
-                    bool hasLife = field[col, row];
-
-                    if (!isSelfChecking && hasLife) count++;
-                }
-            }
-
-            return count;
         }
     }
 }
