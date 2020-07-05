@@ -3,9 +3,9 @@
 <h1 align="center">GameOfLife</h1>
 <div align="center">
 
-[![Badge](https://img.shields.io/badge/Uses-CSharp-brightgreen.svg?style=flat-square&logo=c-sharp&logoWidth=15&logoColor=brightgreen)]("Python")
-[![Badge](https://img.shields.io/badge/Open-Source-important.svg?style=flat-square&logo=open-source-initiative&logoWidth=15&logoColor=orange)]("OpenSource")
-[![Badge](https://img.shields.io/badge/Made_with-Affection-ff69b4.svg?style=flat-square&logo=ko-fi&logoWidth=15&logoColor=ff69b4)]("MadeWithLove")
+[![Badge](https://img.shields.io/badge/Uses-CSharp-brightgreen.svg?style=for-the-badge&logo=c-sharp&logoWidth=15&logoColor=brightgreen)]("Python")
+[![Badge](https://img.shields.io/badge/Open-Source-important.svg?style=for-the-badge&logo=open-source-initiative&logoWidth=15&logoColor=orange)]("OpenSource")
+[![Badge](https://img.shields.io/badge/Made_with-Affection-ff69b4.svg?style=for-the-badge&logo=ko-fi&logoWidth=15&logoColor=ff69b4)]("MadeWithLove")
     
 </div>
 
