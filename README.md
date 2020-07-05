@@ -45,7 +45,7 @@ The initial pattern constitutes the seed of the system. The first generation is 
 
 ## How it looks
 <div align="center">
-	<img src="https://github.com/Ythosa/GameOfLife/blob/master/Assets/Application.jpg" alt="Application screenshot." />
+	<img src="https://github.com/Ythosa/GameOfLife/blob/master/assets/Application.jpg" alt="Application screenshot." />
 </div>
 
 <br>
