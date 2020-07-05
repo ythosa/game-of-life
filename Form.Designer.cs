@@ -30,21 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.container = new System.Windows.Forms.SplitContainer();
-            this.gameContent = new System.Windows.Forms.PictureBox();
-            this.labelResolution = new System.Windows.Forms.Label();
-            this.nudResolution = new System.Windows.Forms.NumericUpDown();
+            this.bStop = new System.Windows.Forms.Button();
+            this.bStart = new System.Windows.Forms.Button();
             this.nudDensity = new System.Windows.Forms.NumericUpDown();
             this.labelDensity = new System.Windows.Forms.Label();
-            this.bStart = new System.Windows.Forms.Button();
-            this.bStop = new System.Windows.Forms.Button();
+            this.nudResolution = new System.Windows.Forms.NumericUpDown();
+            this.labelResolution = new System.Windows.Forms.Label();
+            this.gameContent = new System.Windows.Forms.PictureBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.container)).BeginInit();
             this.container.Panel1.SuspendLayout();
             this.container.Panel2.SuspendLayout();
             this.container.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gameContent)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameContent)).BeginInit();
             this.SuspendLayout();
             // 
             // container
@@ -72,48 +72,30 @@
             this.container.SplitterDistance = 208;
             this.container.TabIndex = 0;
             // 
-            // gameContent
+            // bStop
             // 
-            this.gameContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gameContent.Location = new System.Drawing.Point(0, 0);
-            this.gameContent.Name = "gameContent";
-            this.gameContent.Size = new System.Drawing.Size(917, 585);
-            this.gameContent.TabIndex = 0;
-            this.gameContent.TabStop = false;
+            this.bStop.FlatAppearance.BorderSize = 0;
+            this.bStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.bStop.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bStop.Location = new System.Drawing.Point(106, 257);
+            this.bStop.Name = "bStop";
+            this.bStop.Size = new System.Drawing.Size(77, 30);
+            this.bStop.TabIndex = 5;
+            this.bStop.Text = "Stop";
+            this.bStop.UseVisualStyleBackColor = true;
+            this.bStop.Click += new System.EventHandler(this.bStop_Click);
             // 
-            // labelResolution
+            // bStart
             // 
-            this.labelResolution.AutoSize = true;
-            this.labelResolution.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelResolution.Location = new System.Drawing.Point(10, 34);
-            this.labelResolution.Name = "labelResolution";
-            this.labelResolution.Size = new System.Drawing.Size(110, 22);
-            this.labelResolution.TabIndex = 0;
-            this.labelResolution.Text = "Resolution";
-            // 
-            // nudResolution
-            // 
-            this.nudResolution.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudResolution.Location = new System.Drawing.Point(32, 74);
-            this.nudResolution.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            this.nudResolution.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudResolution.Name = "nudResolution";
-            this.nudResolution.Size = new System.Drawing.Size(142, 26);
-            this.nudResolution.TabIndex = 1;
-            this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudResolution.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
+            this.bStart.FlatAppearance.BorderSize = 0;
+            this.bStart.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bStart.Location = new System.Drawing.Point(23, 257);
+            this.bStart.Name = "bStart";
+            this.bStart.Size = new System.Drawing.Size(77, 30);
+            this.bStart.TabIndex = 4;
+            this.bStart.Text = "Start";
+            this.bStart.UseVisualStyleBackColor = true;
+            this.bStart.Click += new System.EventHandler(this.bStart_Click);
             // 
             // nudDensity
             // 
@@ -144,30 +126,49 @@
             this.labelDensity.TabIndex = 2;
             this.labelDensity.Text = "Density";
             // 
-            // bStart
+            // nudResolution
             // 
-            this.bStart.FlatAppearance.BorderSize = 0;
-            this.bStart.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bStart.Location = new System.Drawing.Point(23, 257);
-            this.bStart.Name = "bStart";
-            this.bStart.Size = new System.Drawing.Size(77, 30);
-            this.bStart.TabIndex = 4;
-            this.bStart.Text = "Start";
-            this.bStart.UseVisualStyleBackColor = true;
-            this.bStart.Click += new System.EventHandler(this.bStart_Click);
+            this.nudResolution.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudResolution.Location = new System.Drawing.Point(32, 74);
+            this.nudResolution.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.nudResolution.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudResolution.Name = "nudResolution";
+            this.nudResolution.Size = new System.Drawing.Size(142, 26);
+            this.nudResolution.TabIndex = 1;
+            this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudResolution.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
-            // bStop
+            // labelResolution
             // 
-            this.bStop.FlatAppearance.BorderSize = 0;
-            this.bStop.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.bStop.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bStop.Location = new System.Drawing.Point(106, 257);
-            this.bStop.Name = "bStop";
-            this.bStop.Size = new System.Drawing.Size(77, 30);
-            this.bStop.TabIndex = 5;
-            this.bStop.Text = "Stop";
-            this.bStop.UseVisualStyleBackColor = true;
-            this.bStop.Click += new System.EventHandler(this.bStop_Click);
+            this.labelResolution.AutoSize = true;
+            this.labelResolution.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResolution.Location = new System.Drawing.Point(10, 34);
+            this.labelResolution.Name = "labelResolution";
+            this.labelResolution.Size = new System.Drawing.Size(110, 22);
+            this.labelResolution.TabIndex = 0;
+            this.labelResolution.Text = "Resolution";
+            // 
+            // gameContent
+            // 
+            this.gameContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gameContent.Location = new System.Drawing.Point(0, 0);
+            this.gameContent.Name = "gameContent";
+            this.gameContent.Size = new System.Drawing.Size(917, 585);
+            this.gameContent.TabIndex = 0;
+            this.gameContent.TabStop = false;
+            this.gameContent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gameContent_MouseMove);
             // 
             // timer
             // 
@@ -188,9 +189,9 @@
             this.container.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.container)).EndInit();
             this.container.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gameContent)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameContent)).EndInit();
             this.ResumeLayout(false);
 
         }

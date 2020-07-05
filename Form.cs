@@ -22,6 +22,7 @@ namespace GameOfLife
         public Form()
         {
             InitializeComponent();
+            Text = "Game of Life";
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -39,12 +40,38 @@ namespace GameOfLife
             StopGame();
         }
 
+        private void gameContent_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!timer.Enabled) return;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                var x = e.Location.X / resolution;
+                var y = e.Location.Y / resolution;
+                var isValidationPassed = ValidateMousePosition(x, y);
+
+                if (isValidationPassed) field[x, y] = true;
+            } else if (e.Button == MouseButtons.Right)
+            {
+                var x = e.Location.X / resolution;
+                var y = e.Location.Y / resolution;
+                var isValidationPassed = ValidateMousePosition(x, y);
+
+                if (isValidationPassed) field[x, y] = false;
+            }
+        }
+
+        private bool ValidateMousePosition(int x, int y)
+        {
+            return x >= 0 && y >= 0 && x < cols && y < rows;
+        }
+
         private void StartGame()
         {
             if (timer.Enabled) return; // If game has already starts
 
             currentGeneration = 0;
-            Text = $"Generation: {currentGeneration}";
+            Text = $"Game of Life. Generation: {currentGeneration}";
 
             nudResolution.Enabled = false;
             nudDensity.Enabled = false;
@@ -112,7 +139,7 @@ namespace GameOfLife
                 }
             }
 
-            Text = $"Generation: {++currentGeneration}";
+            Text = $"Game of Life. Generation: {++currentGeneration}";
             field = newField;
             gameContent.Refresh();
         }
