@@ -29,30 +29,42 @@ namespace GameOfLife
             if (isPaused)
             {
                 bStart.Enabled = false;
-                ResumeGame();
+                bStop.Enabled = true;
+                isPaused = false;
 
-                SetPaused();
+                ResumeGame();
             } else
             {
+                bStart.Enabled = false;
                 bStop.Enabled = true;
+                isPaused = false;
+
                 StartGame();
             }
+
+            SetupButtons();
         }
 
         private void bStop_Click(object sender, EventArgs e)
         {
-            SetPaused();
-
             if (isPaused)
             {
                 bStart.Enabled = true;
+                bStop.Enabled = false;
+                isPaused = false;
+
                 StopGame();
             }
             else
             {
-                bStop.Enabled = false;
+                bStart.Enabled = true;
+                bStop.Enabled = true;
+                isPaused = true;
+
                 PauseGame();
             }
+
+            SetupButtons();
         }
 
         private void gameContent_MouseMove(object sender, MouseEventArgs e)
@@ -80,6 +92,9 @@ namespace GameOfLife
         private void PauseGame()
         {
             timer.Stop();
+
+            nudResolution.Enabled = false;
+            nudDensity.Enabled = false;
         }
 
         private void StopGame()
@@ -95,20 +110,16 @@ namespace GameOfLife
             timer.Start();
         }
 
-        private void SetPaused()
+        private void SetupButtons()
         {
             if (isPaused)
             {
-                bStop.Text = "Pause";
-                bStart.Text = "Start";
-
-                isPaused = false;
-            } else
-            {
                 bStop.Text = "Stop";
                 bStart.Text = "Resume";
-
-                isPaused = true;
+            } else
+            {
+                bStop.Text = "Pause";
+                bStart.Text = "Start";
             }
         }
     }
