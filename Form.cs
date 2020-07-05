@@ -22,6 +22,10 @@ namespace GameOfLife
         public Form()
         {
             InitializeComponent();
+        }
+
+        private void Form_Load(object sender, EventArgs e)
+        {
             Text = "Game of Life";
         }
 
@@ -46,19 +50,20 @@ namespace GameOfLife
 
             if (e.Button == MouseButtons.Left)
             {
-                var x = e.Location.X / resolution;
-                var y = e.Location.Y / resolution;
-                var isValidationPassed = ValidateMousePosition(x, y);
-
-                if (isValidationPassed) field[x, y] = true;
+                SetOnMousePos(e.Location.X, e.Location.Y, true);
             } else if (e.Button == MouseButtons.Right)
             {
-                var x = e.Location.X / resolution;
-                var y = e.Location.Y / resolution;
-                var isValidationPassed = ValidateMousePosition(x, y);
-
-                if (isValidationPassed) field[x, y] = false;
+                SetOnMousePos(e.Location.X, e.Location.Y, false);
             }
+        }
+
+        private void SetOnMousePos(int mouseX, int mouseY, bool value)
+        {
+            var x = mouseX / resolution;
+            var y = mouseY / resolution;
+            var isValidationPassed = ValidateMousePosition(x, y);
+
+            if (isValidationPassed) field[x, y] = value;
         }
 
         private bool ValidateMousePosition(int x, int y)
