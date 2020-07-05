@@ -85,18 +85,36 @@ namespace GameOfLife
         {
             graphics.Clear(Color.Black);
 
+            var newField = new bool[cols, rows];
+
             for (int x = 0; x < cols; x++)
             {
                 for (int y = 0; y < rows; y++)
                 {
-                    if (field[x, y])
+                    var neighboursCount = CountNeightbours(x, y);
+                    var hasLife = field[x, y];
+
+                    if (!hasLife && neighboursCount == 3)
+                        newField[x, y] = true;
+                    else if (hasLife && (neighboursCount < 2 || neighboursCount > 3))
+                        newField[x, y] = false;
+                    else
+                        newField[x, y] = field[x, y];
+                    
+                    if (hasLife)
                     {
                         graphics.FillRectangle(Brushes.Crimson, x * resolution, y * resolution, resolution, resolution);
                     }
                 }
             }
 
+            field = newField;
             gameContent.Refresh();
+        }
+
+        private int CountNeightbours(int x, int y)
+        {
+            return 0;
         }
     }
 }
