@@ -1,6 +1,6 @@
 <br>
 
-<h1 align="center">GameOfLife</h1>
+<h1 align="center">Game of Life</h1>
 <div align="center">
 
 [![Badge](https://img.shields.io/badge/Uses-CSharp-brightgreen.svg?style=for-the-badge&logo=c-sharp&logoWidth=15&logoColor=brightgreen)](https://docs.microsoft.com/ru-ru/dotnet/csharp/)
